@@ -27,12 +27,15 @@ RUN yum install -y python3 && \
 ARG RUBY_PATH=/usr/local
 ARG RUBY_VERSION=2.6.5
 RUN git clone git://github.com/rbenv/ruby-build.git $RUBY_PATH/plugins/ruby-build \
-&&  $RUBY_PATH/plugins/ruby-build/install.sh
+    &&  $RUBY_PATH/plugins/ruby-build/install.sh
 RUN ruby-build $RUBY_VERSION $RUBY_PATH/
 ENV PATH $RUBY_PATH/bin:$PATH
 
+ARG JEKYLL_VERSION=4.2.1
+
 RUN gem update --system
-RUN gem install jekyll
+RUN gem install rdoc
+RUN gem install jekyll -v ${JEKYLL_VERSION}
 RUN gem install bundler
 RUN gem install jekyll-theme-minimal
 

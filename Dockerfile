@@ -34,10 +34,13 @@ RUN gem update --system
 
 WORKDIR /home/user
 
-COPY Gemfile ./
-RUN gem install bundler &&\
-    bundler install &&\
+RUN gem install rdoc &&\
+    gem install bundler &&\
     gem install jekyll-theme-minimal
+
+#Commenting the following instructions to make it more aligned with the github actions one
+#COPY Gemfile ./
+#bundle install &&\
 
 RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - &&\
     yum -y install nodejs openssl &&\

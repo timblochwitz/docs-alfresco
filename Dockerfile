@@ -32,12 +32,12 @@ ENV PATH $RUBY_PATH/bin:$PATH
 
 RUN gem update --system
 
-WORKDIR /home/user
 
 RUN gem install rdoc &&\
     gem install bundler &&\
     gem install jekyll-theme-minimal
 
+WORKDIR /home/user
 #Commenting the following instructions to make it more aligned with the github actions one
 #COPY Gemfile ./
 #bundle install &&\

@@ -7,7 +7,6 @@ RUN yum install -y python3 && \
     yum install -y zip && \
     yum install -y unzip && \
     yum install -y nano && \
-    yum install -y git && \
     yum install -y which && \
     yum install -y groff && \
     yum install -y wget && \
@@ -31,19 +30,19 @@ RUN git clone git://github.com/rbenv/ruby-build.git $RUBY_PATH/plugins/ruby-buil
 RUN ruby-build $RUBY_VERSION $RUBY_PATH/
 ENV PATH $RUBY_PATH/bin:$PATH
 
-ARG JEKYLL_VERSION=4.2.1
+
 
 RUN gem update --system
-RUN gem install rdoc
-RUN gem install jekyll -v ${JEKYLL_VERSION}
-RUN gem install bundler
-RUN gem install jekyll-theme-minimal
-
-RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash -
-RUN yum -y install nodejs openssl
-RUN npm install gulp-cli -g
-RUN npm i
 
 WORKDIR /home/user
+COPY Gemfile ./
+RUN gem install bundler &&\
+    bundler install &&\
+    gem install jekyll-theme-minimal
+
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - &&\
+    yum -y install nodejs openssl &&\
+    npm install gulp-cli -g &&\
+    npm i
 
 COPY . .

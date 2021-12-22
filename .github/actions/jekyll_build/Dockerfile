@@ -33,12 +33,13 @@ ENV PATH $RUBY_PATH/bin:$PATH
 ARG JEKYLL_VERSION=4.2.1
 
 RUN gem update --system
-RUN gem install rdoc
-RUN gem install jekyll -v ${JEKYLL_VERSION}
-RUN gem install bundler
-RUN gem install jekyll-theme-minimal
 
 WORKDIR /home/user
+COPY Gemfile ./
+RUN gem install bundler &&\
+    bundler install &&\
+    gem install jekyll-theme-minimal
+
 
 COPY entrypoint.sh /entrypoint.sh
 

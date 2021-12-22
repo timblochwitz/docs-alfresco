@@ -35,7 +35,7 @@ ARG JEKYLL_VERSION=4.2.1
 RUN gem update --system
 
 WORKDIR /home/user
-COPY Gemfile ./
+
 RUN gem install bundler &&\
     bundler install &&\
     gem install jekyll-theme-minimal

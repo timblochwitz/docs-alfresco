@@ -30,14 +30,11 @@ RUN git clone git://github.com/rbenv/ruby-build.git $RUBY_PATH/plugins/ruby-buil
 RUN ruby-build $RUBY_VERSION $RUBY_PATH/
 ENV PATH $RUBY_PATH/bin:$PATH
 
-ARG JEKYLL_VERSION=4.2.1
-
 RUN gem update --system
 
 WORKDIR /home/user
 
 RUN gem install bundler &&\
-    bundler install &&\
     gem install jekyll-theme-minimal
 
 

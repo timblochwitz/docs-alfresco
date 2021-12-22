@@ -30,8 +30,6 @@ RUN git clone git://github.com/rbenv/ruby-build.git $RUBY_PATH/plugins/ruby-buil
 RUN ruby-build $RUBY_VERSION $RUBY_PATH/
 ENV PATH $RUBY_PATH/bin:$PATH
 
-
-
 RUN gem update --system
 
 WORKDIR /home/user

@@ -35,6 +35,7 @@ ENV PATH $RUBY_PATH/bin:$PATH
 RUN gem update --system
 
 WORKDIR /home/user
+
 COPY Gemfile ./
 RUN gem install bundler &&\
     bundler install &&\
